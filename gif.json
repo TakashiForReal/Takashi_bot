@@ -1,0 +1,51 @@
+{
+    "Cat": {
+        "angry_cat_small": "https://tenor.com/view/luccabug-angry-cat-angry-cat-being-pet-cat-pet-cat-gif-16721872127246114794",
+        "angry_cat_big": "https://tenor.com/view/cat-gif-2680884020478943185",
+        "smile_cat": "https://tenor.com/view/devious-evil-cat-evil-cat-smirk-gif-9493503150186829189",
+        "pat": "https://tenor.com/view/panko-cat-pankocat-fatfatpankocat-pet-gif-228857265189960783",
+        "punch": "https://tenor.com/view/cat-punching-angry-mad-gif-24670332",
+        "cry_kitty": "https://tenor.com/view/cat-reaction-michi-triste-crying-cat-reaction-sad-cat-hannicion-gif-17190162121303461099",
+        "huh cat": "https://tenor.com/view/huh-cat-huh-m4rtin-huh-huh-meme-what-cat-gif-27377993",
+        "happy": "https://tenor.com/view/crazy-cat-cat-gatito-crazy-insane-gif-4445261359056491120"
+        
+    },
+
+    "Stare": {
+        "stare_angry": "https://tenor.com/view/cat-stare-angry-cat-funny-cat-memes-gif-14595486679217135725",
+        "stare_nonchalant": "https://tenor.com/view/cat-stewert-rage-pissed-off-angry-gif-189652034235049225",
+        "stare_normal": "https://tenor.com/view/cat-cat-stare-stare-looking-cat-looking-gif-8761430571097833938",
+        "stare_cute": "https://tenor.com/view/cat-gif-24016671"
+    },
+
+    "Suprise": {
+        "suprise1": "https://tenor.com/view/funny-funnyfix-confused-eyes-cat-gif-26365037",
+        "suprise2": "https://tenor.com/view/cat-stare-big-eyes-gif-26476010",
+        "suprise3": "https://tenor.com/view/cat-gif-24375954",
+        "suprise4": "https://tenor.com/view/funny-funny-cat-wondering-cat-wondering-big-eyes-cat-gif-14765621833217986750"
+    },
+
+    "sunsun": {
+        "OK": "https://tenor.com/view/%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-%E3%83%91%E3%83%9A%E3%83%83%E3%83%88%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-gif-9627291533192079246",
+        "ホワー": "https://tenor.com/view/sunsun-%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-gif-3904930764873489442",
+        "トースト": "https://tenor.com/view/sunsun-toast-augh-gif-12675556250333241728",
+        "ブルブル": "https://tenor.com/view/%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-sunsun-gif-10379030414010743309",
+        "振り返る": "https://tenor.com/view/%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-sunsun-gif-17863992667255235391",
+        "ロマンチック": "https://tenor.com/view/sunsun-%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-%E3%83%91%E3%83%9A%E3%83%83%E3%83%88%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-shock-what-the-gif-8123462273723098658",
+        "ダンス": "https://tenor.com/view/%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-sunsun-gif-18373245261511174457",
+        "ひょっこり": "https://tenor.com/view/sunsun-%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-gif-13287397237228886504",
+        "へどばん": "https://tenor.com/view/sunsun-%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-gif-8410021770233145154",
+        "うん": "https://tenor.com/view/sunsun-tiger-winter-%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-%E3%83%91%E3%83%9A%E3%83%83%E3%83%88%E3%82%B9%E3%83%B3%E3%82%B9%E3%83%B3-gif-24256356"
+    },
+
+    "HIKAKIN":{
+        "何を四天王": "https://tenor.com/view/%E3%83%92%E3%82%AB%E3%82%AD%E3%83%B3-%E6%80%92%E3%82%8B-%E3%82%AD%E3%83%AC%E3%82%8B-%E3%83%A2%E3%83%B3%E3%82%B9%E3%83%88-gif-7101061465979974584",
+        "泣く": "https://tenor.com/view/%E3%83%92%E3%82%AB%E3%82%AD%E3%83%B3-%E3%83%92%E3%82%AB%E3%83%9E%E3%83%8B-%E6%B3%A3%E3%81%8F-gif-6087490842133609093"
+    },
+
+    "Other":{
+        "idk": "https://tenor.com/view/i-don%27t-know-idk-idk-about-that-gif-7336250873949261946",
+        "nah uh": "https://tenor.com/view/nuh-uh-beocord-no-lol-gif-24435520"
+    }
+    
+}
