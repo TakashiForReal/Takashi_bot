@@ -62,7 +62,7 @@ class Client(commands.Bot):
             await message.reply(cat_gif["angry_cat_big"])
         elif "おら" in text:
             await message.channel.send(cat_gif["punch"])
-        elif "病んだ" in text and sender_id == takashi_id:
+        elif ("病んだ" in text or "やんだ" in text) and sender_id == takashi_id:
             await message.channel.send(HIKAKIN_gif["泣く"])
         elif "泣いた" in text or "ないた" in text:
             await message.channel.send(cat_gif["cry_kitty"])
