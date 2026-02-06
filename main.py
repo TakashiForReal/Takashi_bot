@@ -42,7 +42,7 @@ stare_keys = list(stare_gif.keys())
 
 
 # ===== 定期ヘルスチェック =====
-async def health_check():
+async def health_check_function():
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"🔍 [{now}] ヘルスチェック実行中... ({HEALTH_CHECK_URL})")
     try:
@@ -58,7 +58,7 @@ async def health_check():
 
 async def periodic_health_check():
     while True:
-        await health_check()
+        await health_check_function()
         await asyncio.sleep(INTERVAL)
 
 # ===== Quart サーバー（ルート /health） =====
