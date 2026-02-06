@@ -64,8 +64,12 @@ async def periodic_health_check():
 # ===== Quart サーバー（ルート /health） =====
 app = Quart(__name__)
 
+@app.route('/')
+async def index():
+    return 'Welcome to the homepage'
+
 @app.route("/health_check")
-async def health():
+async def health_check():
     return "OK"
 
 
