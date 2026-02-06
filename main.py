@@ -67,23 +67,7 @@ app = Quart(__name__)
 async def health():
     return "OK"
 
-# ===== メイン =====
-async def main():
-    # Quart サーバーをバックグラウンドで起動
-    import hypercorn.asyncio
-    import hypercorn.config
 
-    config = hypercorn.config.Config()
-    config.bind = [f"0.0.0.0:{PORT}"]
-
-    # Bot と Quart サーバーを同時に走らせる
-    await asyncio.gather(
-        client.start(TOKEN),
-        hypercorn.asyncio.serve(app, config)
-    )
-
-if __name__ == "__main__":
-    asyncio.run(main())
 class Client(commands.Bot):
     async def on_ready(self):
         print(f'Logged as {self.user}')
@@ -167,3 +151,21 @@ client = Client(command_prefix="takasiii ",intents=intents)
 @client.tree.command(name="helloworld",description="hello world",guild=TEST_GUILD_ID)
 async def hello_world(interaction: discord.Interaction):
     await interaction.response.send_message("Hello World")
+
+# ===== メイン =====
+async def main():
+    # Quart サーバーをバックグラウンドで起動
+    import hypercorn.asyncio
+    import hypercorn.config
+
+    config = hypercorn.config.Config()
+    config.bind = [f"0.0.0.0:{PORT}"]
+
+    # Bot と Quart サーバーを同時に走らせる
+    await asyncio.gather(
+        client.start(TOKEN),
+        hypercorn.asyncio.serve(app, config)
+    )
+
+if __name__ == "__main__":
+    asyncio.run(main())
