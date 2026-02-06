@@ -10,6 +10,7 @@ from quart import Quart
 import aiohttp
 
 PORT = os.environ.get("PORT", "8000")  # デフォルトは 8000
+print(PORT)
 HEALTH_CHECK_URL = os.environ.get("HEALTH_CHECK_URL", f"http://localhost:{PORT}")
 INTERVAL = 10 * 60
 
