@@ -1,3 +1,4 @@
 .env
 decode.py
 json_test.py
+version.py

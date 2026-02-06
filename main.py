@@ -1,12 +1,21 @@
 import os
+import asyncio
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import json
 import random
+from datetime import datetime
+import aiohttp
+from aiohttp import web
 
-load_dotenv()
-TOKEN = os.getenv("BOT_TOKEN")
+PORT = os.environ.get("PORT", "8000")  # デフォルトは 8000
+HEALTH_CHECK_URL = os.environ.get("HEALTH_CHECK_URL", f"http://localhost:{PORT}")
+INTERVAL = 10 * 60
+
+#load_dotenv()
+#TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 
 takashi_id = 1078538420688781384
 souyanen_id = 1026089885385367582
@@ -29,10 +38,44 @@ sunsun_keys = list(sunsun_gif.keys())
 suprise_keys  = list(suprise_gif.keys())
 stare_keys = list(stare_gif.keys())
 
+
+
+# ===== ヘルスチェック =====
+async def health_check():
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"🔍 [{now}] ヘルスチェック実行中... ({HEALTH_CHECK_URL})")
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(HEALTH_CHECK_URL) as response:
+                if response.status == 200:
+                    print(f"✅ [{now}] ヘルスチェック成功: {response.status}")
+                else:
+                    print(f"⚠️ [{now}] ヘルスチェック失敗: {response.status}")
+    except Exception as e:
+        print(f"❌ [{now}] ヘルスチェックエラー: {e}")
+
+async def periodic_health_check():
+    while True:
+        await health_check()
+        await asyncio.sleep(INTERVAL)
+
+# ===== aiohttp サーバー（ルート /health） =====
+async def handle_health(request):
+    return web.Response(text="OK")
+
+app = web.Application()
+app.router.add_get("/health", handle_health)  # ←これがルート
+
+# aiohttp サーバーをバックグラウンドで起動
+runner = web.AppRunner(app)
+async def start_server():
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", PORT)
+    await site.start()
 class Client(commands.Bot):
     async def on_ready(self):
-        print(f'{self.user} finished set up')
-
+        print(f'Logged as {self.user}')
+        asyncio.create_task(periodic_health_check())
         try:
             guild = discord.Object(id=1323054974770352128)
             synced = await self.tree.sync(guild=guild)
@@ -113,4 +156,8 @@ client = Client(command_prefix="takasiii ",intents=intents)
 async def hello_world(interaction: discord.Interaction):
     await interaction.response.send_message("Hello World")
 
-client.run(TOKEN)
+async def main():
+    await start_server()
+    await client.start(TOKEN)
+
+asyncio.run(main())
