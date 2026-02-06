@@ -64,7 +64,7 @@ async def handle_health(request):
     return web.Response(text="OK")
 
 app = web.Application()
-app.router.add_get("/health", handle_health)  # ←これがルート
+app.router.add_get("/health_check", handle_health)  # ←これがルート
 
 # aiohttp サーバーをバックグラウンドで起動
 runner = web.AppRunner(app)
