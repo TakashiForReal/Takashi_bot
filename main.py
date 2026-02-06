@@ -14,7 +14,7 @@ INTERVAL = 10 * 60
 
 #load_dotenv()
 #TOKEN = os.getenv("BOT_TOKEN")
-TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
+TOKEN = os.environ.get("BOT_TOKEN")
 
 takashi_id = 1078538420688781384
 souyanen_id = 1026089885385367582
