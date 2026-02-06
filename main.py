@@ -68,7 +68,7 @@ app = Quart(__name__)
 async def index():
     return 'OK'
 
-@app.route("/health/health_check")
+@app.route("/health_check")
 async def health_check():
     return "OK"
 
