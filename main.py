@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 import json
 import random
 from datetime import datetime
-import aiohttp
-from aiohttp import web
+from quart import Quart
 
 PORT = os.environ.get("PORT", "8000")  # デフォルトは 8000
 HEALTH_CHECK_URL = os.environ.get("HEALTH_CHECK_URL", f"http://localhost:{PORT}")
@@ -40,15 +39,17 @@ stare_keys = list(stare_gif.keys())
 
 
 
-# ===== ヘルスチェック =====
+# ===== 定期ヘルスチェック =====
 async def health_check():
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"🔍 [{now}] ヘルスチェック実行中... ({HEALTH_CHECK_URL})")
     try:
+        # Bot と同じ asyncio ループで非同期アクセス
+        import aiohttp
         async with aiohttp.ClientSession() as session:
             async with session.get(HEALTH_CHECK_URL) as response:
                 if response.status == 200:
-                    print(f"✅ [{now}] ヘルスチェック成功: {response.status}")
+                    print(f"✅ [{now}] ヘルスチェック成功")
                 else:
                     print(f"⚠️ [{now}] ヘルスチェック失敗: {response.status}")
     except Exception as e:
@@ -59,19 +60,30 @@ async def periodic_health_check():
         await health_check()
         await asyncio.sleep(INTERVAL)
 
-# ===== aiohttp サーバー（ルート /health） =====
-async def handle_health(request):
-    return web.Response(text="OK")
+# ===== Quart サーバー（ルート /health） =====
+app = Quart(__name__)
 
-app = web.Application()
-app.router.add_get("/health_check", handle_health)  # ←これがルート
+@app.route("/health_check")
+async def health():
+    return "OK"
 
-# aiohttp サーバーをバックグラウンドで起動
-runner = web.AppRunner(app)
-async def start_server():
-    await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", PORT)
-    await site.start()
+# ===== メイン =====
+async def main():
+    # Quart サーバーをバックグラウンドで起動
+    import hypercorn.asyncio
+    import hypercorn.config
+
+    config = hypercorn.config.Config()
+    config.bind = [f"0.0.0.0:{PORT}"]
+
+    # Bot と Quart サーバーを同時に走らせる
+    await asyncio.gather(
+        client.start(TOKEN),
+        hypercorn.asyncio.serve(app, config)
+    )
+
+if __name__ == "__main__":
+    asyncio.run(main())
 class Client(commands.Bot):
     async def on_ready(self):
         print(f'Logged as {self.user}')
@@ -155,9 +167,3 @@ client = Client(command_prefix="takasiii ",intents=intents)
 @client.tree.command(name="helloworld",description="hello world",guild=TEST_GUILD_ID)
 async def hello_world(interaction: discord.Interaction):
     await interaction.response.send_message("Hello World")
-
-async def main():
-    await start_server()
-    await client.start(TOKEN)
-
-asyncio.run(main())
