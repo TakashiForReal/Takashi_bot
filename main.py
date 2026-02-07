@@ -9,8 +9,7 @@ from datetime import datetime
 from quart import Quart
 import aiohttp
 
-PORT = os.environ.get("PORT", "8000")  # デフォルトは 8000
-print(PORT)
+PORT = os.environ.get("PORT", "8000")
 HEALTH_CHECK_URL = os.environ.get("HEALTH_CHECK_URL", f"http://localhost:{PORT}")
 INTERVAL = 10 * 60
 
@@ -104,6 +103,10 @@ class Client(commands.Bot):
             await message.channel.send(suprise_gif[random.choice(suprise_keys)])
         elif "dame" in text or "mac" in text:
             await message.reply(cat_gif["angry_cat_big"])
+        elif "一体何事" == text:
+            await message.channel.send("何が起きた")
+        elif "何が起きた" == text:
+            await message.channel.send("一体何事")
         elif "おら" in text:
             await message.channel.send(cat_gif["punch"])
         elif ("病んだ" in text or "やんだ" in text) and sender_id == takashi_id:
