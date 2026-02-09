@@ -22,6 +22,7 @@ souyanen_id = 1026089885385367582
 seiigo_id = 1125594839019438120
 yuma_id = 1456935235135475749
 cat_id = 1413527517180072040
+chicken_id = 1369341183779799051
 
 TEST_GUILD_ID = discord.Object(id=1323054974770352128)
 POSITIVE_GUILD_ID = discord.Object(id=1433547946271703150)
@@ -93,7 +94,7 @@ class Client(commands.Bot):
         if message.author == self.user:
             return
         sender_id = message.author.id
-        if sender_id == yuma_id:
+        if sender_id in [yuma_id,chicken_id]:
             return
         text = message.content
         print(text)
