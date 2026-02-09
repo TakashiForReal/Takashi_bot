@@ -39,6 +39,7 @@ sunsun_keys = list(sunsun_gif.keys())
 suprise_keys  = list(suprise_gif.keys())
 stare_keys = list(stare_gif.keys())
 
+auto_reply = True
 
 
 # ===== 定期ヘルスチェック =====
@@ -91,6 +92,8 @@ class Client(commands.Bot):
 
 
     async def on_message(self,message):
+        if not auto_reply:
+            return
         if message.author == self.user:
             return
         sender_id = message.author.id
@@ -160,6 +163,18 @@ client = Client(command_prefix="takasiii ",intents=intents)
 @client.tree.command(name="helloworld",description="hello world",guild=TEST_GUILD_ID)
 async def hello_world(interaction: discord.Interaction):
     await interaction.response.send_message("Hello World")
+
+@client.tree.command(name="toggleautoreply",description="hello world",guilds=[TEST_GUILD_ID,POSITIVE_GUILD_ID])
+async def toggle_auto_reply(interaction: discord.Interaction):
+    if interaction.user.id != client.owner_id:
+        await interaction.response.send_message("カスがコマンドつかうなや",ephemeral=True)
+        return
+    auto_reply = not auto_reply
+    if auto_reply:
+        await interaction.response.send_message("俺が返事してあげるよ！")
+    else:
+        await interaction.response.send_message("もう返事しないんだから！")
+    
 
 # ===== メイン =====
 async def main():
