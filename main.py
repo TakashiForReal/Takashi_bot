@@ -171,6 +171,7 @@ async def toggle_auto_reply(interaction: discord.Interaction):
     if interaction.user.id != takashi_id:
         await interaction.response.send_message("カスがコマンドつかうなや",ephemeral=True)
         return
+    global auto_reply
     auto_reply = not auto_reply
     if auto_reply:
         await interaction.response.send_message("俺が返事してあげるよ！")
