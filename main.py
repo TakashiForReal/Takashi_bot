@@ -8,6 +8,8 @@ import random
 from datetime import datetime
 from quart import Quart
 import aiohttp
+import hypercorn.asyncio
+import hypercorn.config
 
 PORT = os.environ.get("PORT", "8000")
 HEALTH_CHECK_URL = os.environ.get("HEALTH_CHECK_URL", f"http://localhost:{PORT}")
@@ -166,7 +168,7 @@ async def hello_world(interaction: discord.Interaction):
 
 @client.tree.command(name="toggleautoreply",description="hello world",guilds=[TEST_GUILD_ID,POSITIVE_GUILD_ID])
 async def toggle_auto_reply(interaction: discord.Interaction):
-    if interaction.user.id != client.owner_id:
+    if interaction.user.id != takashi_id:
         await interaction.response.send_message("カスがコマンドつかうなや",ephemeral=True)
         return
     auto_reply = not auto_reply
@@ -179,8 +181,6 @@ async def toggle_auto_reply(interaction: discord.Interaction):
 # ===== メイン =====
 async def main():
     # Quart サーバーをバックグラウンドで起動
-    import hypercorn.asyncio
-    import hypercorn.config
 
     config = hypercorn.config.Config()
     config.bind = [f"0.0.0.0:{PORT}"]
